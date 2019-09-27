@@ -4,20 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Author;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\AuthorRequest;
 
 class AuthorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -25,7 +15,7 @@ class AuthorController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.author.create');
     }
 
     /**
@@ -34,20 +24,14 @@ class AuthorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AuthorRequest $request)
     {
-        //
-    }
+        Author::create(['first_name' => $request->first_name,
+                        'second_name' => $request->second_name,
+                        'biography' => $request->biography,
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Author  $author
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Author $author)
-    {
-        //
+            ]);
+        return redirect()->route('authors');
     }
 
     /**
@@ -58,7 +42,7 @@ class AuthorController extends Controller
      */
     public function edit(Author $author)
     {
-        //
+        return view('admin.author.edit',compact('author'));
     }
 
     /**
@@ -68,19 +52,25 @@ class AuthorController extends Controller
      * @param  \App\Author  $author
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Author $author)
+    public function update(AuthorRequest $request, Author $author)
     {
-        //
+        $author->update(['first_name' => $request->first_name,
+                         'second_name' => $request->second_name,
+                         'biography' => $request->biography,
+        ]);
+        return redirect()->route('authors');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Author  $author
+     * @param  \App\Author $author
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy(Author $author)
     {
-        //
+        $author->delete();
+        return redirect()->route('authors');
     }
 }

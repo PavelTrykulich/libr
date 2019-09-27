@@ -22,11 +22,12 @@
     <div class="container">
         <div class="row">
             @foreach($books as $book)
-                <div class="col-md-4">
+                <div class="col-md-4 my-4">
                     <h2>{{$book->title}}</h2>
                     <p>{{$book->description}}</p>
-                    <p>Author: <a href="{{Route('show.author',$book->author_id)}}">{{$book->author->getFullNameUser()}}</a></p>
+                    <p>Author: <a href="{{Route('show.author',$book->author_id)}}">{{$book->author->getFullName()}}</a></p>
                     <p><a href="{{Route('download',$book->link)}}">Download</a></p>
+                    @include('admin.function.books')
                 </div>
             @endforeach
         </div>

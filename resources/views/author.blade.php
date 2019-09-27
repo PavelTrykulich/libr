@@ -6,8 +6,9 @@
 
         <div class="jumbotron">
             <div class="container">
-                <p class="display-4">{{$author->getFullNameUser()}}</p>
+                <p class="display-4">{{$author->getFullName()}}</p>
                 <p class="display-5"><strong>Biography:</strong> {{$author->biography ?? 'no text'}}</p>
+                @include('admin.function.authors')
             </div>
         </div>
 
@@ -15,10 +16,11 @@
         <div class="container">
             <div class="row">
                 @foreach($books as $book)
-                    <div class="col-md-4">
+                    <div class="col-md-4 my-2">
                         <h2>{{$book->title}}</h2>
                         <p>{{$book->description}}</p>
                         <p><a href="{{Route('download',$book->link)}}">Download</a></p>
+                        @include('admin.function.books')
                     </div>
                 @endforeach
             </div>

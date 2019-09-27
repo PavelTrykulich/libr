@@ -17,16 +17,17 @@ Route::get('/', 'SiteController@index')->name('index');
 
 Route::get('/books/download/{id}', 'SiteController@download')->name('download');
 Route::get('/books/search', 'SiteController@download')->name('download');
+Route::get('/authors', 'SiteController@authors')->name('authors');
 Route::get('/authors/{id}', 'SiteController@showAuthor')->name('show.author');
+Route::get('/categories', 'SiteController@categories')->name('categories');
 
 Route::group(['middleware' => 'auth','namespace' => 'Admin','prefix'=>'admin'], function()
 {
-    Route::get('/', 'AdminController');
-
     Route::resources([
-        'book' => 'BookController',
-        'author' => 'AuthorController'
+        'books' => 'BookController',
+        'authors' => 'AuthorController',
+        'categories' => 'CategoryController'
     ],
-        ['except' => ['show']]
+        ['except' => ['show', 'index']]
     );
 });

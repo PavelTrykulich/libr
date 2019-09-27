@@ -26,7 +26,14 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
-                <a class="navbar-brand" href="{{ route('index')}}">Main</a>
+                <a class="navbar-brand" href="{{route('index')}}">Main</a>
+                <a class="navbar-brand" href="{{route('authors')}}">All authors</a>
+                <a class="navbar-brand" href="{{route('categories')}}">All categories</a>
+            @if(\Illuminate\Support\Facades\Auth::check())
+                    <a class="navbar-brand" href="{{route('authors.create')}}">New author</a>
+                    <a class="navbar-brand" href="{{route('books.create')}}">New book</a>
+                    <a class="navbar-brand" href="{{route('categories.create')}}">New category</a>
+                @endif
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
