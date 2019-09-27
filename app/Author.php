@@ -12,4 +12,9 @@ class Author extends Model
     {
         return $this->hasMany('App\Book');
     }
+
+    public function getFullNameUser()
+    {
+        return $this->first_name . ' ' . $this->second_name;
+    }
 }

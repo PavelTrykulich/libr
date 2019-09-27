@@ -17,7 +17,7 @@ class CreateAuthorsTable extends Migration
             $table->bigIncrements('id');
             $table->char('first_name',30);
             $table->char('second_name',30);
-            $table->string('biography', 255)->nullable();
+            $table->string('biography', 255)->nullable()->default(null);
             $table->timestamps();
         });
     }
