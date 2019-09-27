@@ -11,14 +11,21 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Auth::routes();
+
+Route::get('/', 'SiteController@index')->name('index');
+Route::get('/book/download/{id}', 'SiteController@download')->name('download');
+Route::get('/book/{id}', 'SiteController@showBook')->name('show.book');
+Route::get('/author/{id}', 'SiteController@showAuthor')->name('show.author');
+
+Route::group(['middleware' => 'auth','namespace' => 'Admin','prefix'=>'admin'], function()
+{
+    Route::get('/', 'AdminController');
+
+    Route::resources([
+        'book' => 'BookController',
+        'author' => 'AuthorController'
+    ],
+        ['except' => ['show']]
+    );
 });
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

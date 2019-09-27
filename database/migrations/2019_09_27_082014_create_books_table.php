@@ -17,6 +17,7 @@ class CreateBooksTable extends Migration
             $table->bigIncrements('id');
             $table->char('title',60)->unique();
             $table->string('description', 255)->nullable();
+            $table->text('link');
             $table->bigInteger('author_id')->unsigned();
             $table->timestamps();
 
