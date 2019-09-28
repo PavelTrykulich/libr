@@ -41,7 +41,10 @@ class SiteController extends Controller
 
         $book = Book::find($id);
         $pathToFile = storage_path('app/public/books/' . $book->link);
-        return response()->download($pathToFile);
+        if (file_exists($pathToFile)){
+            return response()->download($pathToFile);
+        }
+        return redirect()->back();
     }
 
     public function filesByCategory($category){
