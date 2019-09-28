@@ -18,7 +18,7 @@ use Illuminate\Support\Str;
 
 $factory->define(Book::class, function (Faker $faker) {
     return [
-        'title' => $faker->text(rand(11,60)) . rand(1,100),
+        'title' => $faker->text(60),
         'description' => $faker->realText(rand(100,200)),
         'link' => rand(1, 5) . '.txt',
         'author_id' => rand(1, 50)
