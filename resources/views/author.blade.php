@@ -3,7 +3,6 @@
 @section('content')
 
     <main role="main">
-
         <div class="jumbotron">
             <div class="container">
                 <p class="display-4">{{$author->getFullName()}}</p>
@@ -19,14 +18,13 @@
                     <div class="col-md-4 my-2">
                         <h2>{{$book->title}}</h2>
                         <p>{{$book->description}}</p>
+                        @include('layouts.showCategories')
                         <p><a href="{{Route('download',$book->id)}}">Download</a></p>
                         @include('admin.function.books')
                     </div>
                 @endforeach
             </div>
-
             <hr>
-
         </div>
         @else
             <div class="alert alert-warning text-center display-5" role="alert">

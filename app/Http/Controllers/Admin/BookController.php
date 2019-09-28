@@ -32,7 +32,6 @@ class BookController extends Controller
     public function store(BookRequest $request)
     {
         $file = $request->file('link');
-
         $file_name = time(). $request->title .'.'. $file->extension();
         $file->storeAs('public/books/' ,$file_name);
 
@@ -93,6 +92,6 @@ class BookController extends Controller
     public function destroy(Book $book)
     {
         $book->delete();
-        return redirect()->route('index');
+        return redirect()->back();;
     }
 }

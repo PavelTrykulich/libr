@@ -75,6 +75,6 @@ class CategoryController extends Controller
             return redirect()->route('categories');
         }
         $category->delete();
-        return redirect()->route('categories');
+        return redirect()->back();
     }
 }

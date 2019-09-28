@@ -4,8 +4,6 @@
     @include('layouts.session_error')
     <div class="container modal-dialog-centered justify-content-md-center">
         <div class="row">
-
-
             <div class="col-md-12">
                 <div class="card bg-dark text-light" style="width: 18rem;">
                     <div class="card-header">

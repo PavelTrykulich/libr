@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
     <div class="container">
         <h3>Update book: {{$book->title}} </h3>
         @include('layouts.errors')
@@ -12,14 +11,16 @@
                     @csrf
                     <input class="form-control my-2 w-50" type="text" placeholder="Title" name="title" value="{{$book->title}}">
                     <input class="form-control my-2 w-50" type="text" placeholder="Description" name="description" value="{{$book->description}}">
-                    <label>Author</label>
+                    <p>Author</p>
+
                     <select class="form-control form-control-sm w-50 my-2" name="author_id">
                         <option value="{{$book->author_id}}">{{$book->author->getFullName()}}</option>
                         @foreach($authors as $author)
                             <option value="{{$author->id}}">{{$author->getFullName()}}</option>
                         @endforeach
                     </select>
-                    <label>Select categories</label>
+
+                    <p>Select categories</p>
                     @foreach($categories as $category)
                         <div class="custom-control custom-checkbox">
                             <input type="checkbox" class="custom-control-input" id="{{$category->id}}" name='categories[]' value="{{$category->id}}"
@@ -28,6 +29,7 @@
                             <br>
                         </div>
                     @endforeach
+
                     <button class="btn btn-success my-2">Update</button>
                 </form>
             </div>

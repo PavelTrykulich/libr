@@ -8,7 +8,7 @@
             <div class="col-md-12 ">
                 <form action="{{Route('categories.store')}}" method="post">
                     @csrf
-                    <input class="form-control my-2 w-50" type="text" placeholder="Category" name="title">
+                    <input class="form-control my-2 w-50" type="text" placeholder="Category" name="title" value="{{old('title')}}">
                     <button class="btn btn-success">Submit</button>
                 </form>
             </div>

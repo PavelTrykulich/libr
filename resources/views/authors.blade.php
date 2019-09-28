@@ -3,6 +3,7 @@
 @section('content')
     @include('layouts.session_error')
     <main role="main">
+
         <div class="container">
             <div class="row">
                 @foreach($authors as $author)
@@ -16,6 +17,7 @@
             </div>
             <hr>
         </div>
+
     </main>
 
     <div class="pagination row justify-content-center">

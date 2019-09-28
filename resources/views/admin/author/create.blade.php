@@ -8,9 +8,9 @@
             <div class="col-md-12 ">
                 <form action="{{Route('authors.store')}}" method="post">
                     @csrf
-                    <input class="form-control my-2 w-50" type="text" placeholder="First name" name="first_name">
-                    <input class="form-control my-2 w-50" type="text" placeholder="Second name" name="second_name">
-                    <textarea  class="form-control my-2 w-50" type="text" placeholder="Biography" name="biography"></textarea>
+                    <input class="form-control my-2 w-50" type="text" placeholder="First name" name="first_name" value="{{old('first_name')}}">
+                    <input class="form-control my-2 w-50" type="text" placeholder="Second name" name="second_name" value="{{old('second_name')}}">
+                    <textarea  class="form-control my-2 w-50" type="text" placeholder="Biography" name="biography">{{old('biography')}}</textarea>
                     <button class="btn btn-success">Submit</button>
                 </form>
             </div>

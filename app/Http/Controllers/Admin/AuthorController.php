@@ -49,7 +49,7 @@ class AuthorController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param AuthorRequest $request
+     * @param Request $request
      * @param  \App\Author $author
      * @return Response
      * @throws \Illuminate\Validation\ValidationException

@@ -8,6 +8,7 @@
         <div class="container">
             <form method="get" action="{{route('search.books.author')}}">
                 <p class="display-4 my-2">Search</p>
+                <p>By the author</p>
                 <select class="form-control form-control-sm my-2 w-75" name="author_id">
                     @foreach($authors as $author)
                         <option value="{{$author->id}}">{{$author->getFullName()}}</option>
@@ -16,7 +17,7 @@
                 <button class="btn btn-secondary my-2 " role="button">Search</button>
             </form>
             <form method="get" action="{{route('search.books.category')}}">
-
+                <p>By the category</p>
                 <select class="form-control form-control-sm my-2 w-75" name="category_id">
                     @foreach($categories as $category)
                         <option value="{{$category->id}}">{{$category->title}}</option>
@@ -45,11 +46,8 @@
                     There are no such books!
                 </div>
             @endif
-
         </div>
-
         <hr>
-
     </div>
 
 </main>

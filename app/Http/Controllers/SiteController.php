@@ -46,7 +46,9 @@ class SiteController extends Controller
 
     public function filesByCategory($category){
         $books = Book::categoryForSelect($category)->paginate(12);
-        return view('index',compact('books'));
+        $categories = Category::all();
+        $authors = Author::all();
+        return view('index',compact('books','categories', 'authors'));
     }
 
     public function searchBooksAuthor(Request $request)

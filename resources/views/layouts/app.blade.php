@@ -24,9 +24,9 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    Libr
                 </a>
-                <a class="navbar-brand" href="{{route('index')}}">Main</a>
+                <a class="navbar-brand" href="{{route('index')}}">Books</a>
                 <a class="navbar-brand" href="{{route('authors')}}">All authors</a>
                 <a class="navbar-brand" href="{{route('categories')}}">All categories</a>
             @if(\Illuminate\Support\Facades\Auth::check())
