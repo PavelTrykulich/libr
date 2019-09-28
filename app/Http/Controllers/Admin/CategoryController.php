@@ -6,6 +6,7 @@ use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
+use Illuminate\Support\Facades\Session;
 
 class CategoryController extends Controller
 {
@@ -70,7 +71,7 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         if ($category->books->isNotEmpty()){
-            //$error = 'First remove or unlink all books in this category.';
+            Session::flash('error', 'First remove or unlink all books in this category.');
             return redirect()->route('categories');
         }
         $category->delete();

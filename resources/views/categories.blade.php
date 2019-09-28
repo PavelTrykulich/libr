@@ -1,14 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+    @include('layouts.session_error')
     <div class="container modal-dialog-centered justify-content-md-center">
         <div class="row">
-            @isset($error)
-                <div class="alert alert-danger">
-                    {{$error}}
-                </div>
-            @endisset
-            <div class="col-md-4">
+
+
+            <div class="col-md-12">
                 <div class="card bg-dark text-light" style="width: 18rem;">
                     <div class="card-header">
                         Category

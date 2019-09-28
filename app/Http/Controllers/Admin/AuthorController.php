@@ -3,17 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Author;
-use App\Category;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthorRequest;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class AuthorController extends Controller
 {
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -24,7 +24,7 @@ class AuthorController extends Controller
      * Store a newly created resource in storage.
      *
      * @param AuthorRequest $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(AuthorRequest $request)
     {
@@ -39,7 +39,7 @@ class AuthorController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Author  $author
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit(Author $author)
     {
@@ -51,7 +51,7 @@ class AuthorController extends Controller
      *
      * @param AuthorRequest $request
      * @param  \App\Author $author
-     * @return \Illuminate\Http\Response
+     * @return Response
      * @throws \Illuminate\Validation\ValidationException
      */
     public function update(Request $request, Author $author)
@@ -73,11 +73,15 @@ class AuthorController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Author $author
-     * @return \Illuminate\Http\Response
+     * @return Response
      * @throws \Exception
      */
     public function destroy(Author $author)
     {
+        if ($author->books->isNotEmpty()){
+            Session::flash('error', 'First remove or unlink all books by this author.');
+            return redirect()->route('authors');
+        }
         $author->delete();
         return redirect()->route('authors');
     }
