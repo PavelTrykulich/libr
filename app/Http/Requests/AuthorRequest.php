@@ -25,7 +25,7 @@ class AuthorRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => 'required|min:2|max:30|unique:authors,first_name',
+            'first_name' => 'required|min:2|max:30|unique:authors,first_name,' . $this->id,
             'second_name' => 'required|min:2|max:30' ,
             'biography' => 'max:255',
         ];

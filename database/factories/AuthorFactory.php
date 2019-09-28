@@ -18,8 +18,8 @@ use Illuminate\Support\Str;
 
 $factory->define(Author::class, function (Faker $faker) {
     return [
-        'first_name' => $faker->name,
-        'second_name' => $faker->name,
+        'first_name' => $faker->firstName,
+        'second_name' => $faker->lastName,
         'biography' => $faker->realText(rand(100, 255))
     ];
 });

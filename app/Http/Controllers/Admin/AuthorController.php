@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Author;
+use App\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthorRequest;
+use Illuminate\Http\Request;
 
 class AuthorController extends Controller
 {
@@ -21,15 +23,14 @@ class AuthorController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param AuthorRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(AuthorRequest $request)
     {
         Author::create(['first_name' => $request->first_name,
                         'second_name' => $request->second_name,
-                        'biography' => $request->biography,
-
+                        'biography' => $request->biography
             ]);
         return redirect()->route('authors');
     }
@@ -48,12 +49,19 @@ class AuthorController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Author  $author
+     * @param AuthorRequest $request
+     * @param  \App\Author $author
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
-    public function update(AuthorRequest $request, Author $author)
+    public function update(Request $request, Author $author)
     {
+        $this->validate($request, [
+            'first_name' => 'required|min:2|max:30|unique:authors,first_name,' . $author->id,
+            'second_name' => 'required|min:2|max:30' ,
+            'biography' => 'max:255',
+        ]);
+
         $author->update(['first_name' => $request->first_name,
                          'second_name' => $request->second_name,
                          'biography' => $request->biography,

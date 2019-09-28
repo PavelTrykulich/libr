@@ -16,9 +16,11 @@ Auth::routes();
 Route::get('/', 'SiteController@index')->name('index');
 
 Route::get('/books/download/{id}', 'SiteController@download')->name('download');
-Route::get('/books/search', 'SiteController@download')->name('download');
+Route::get('/books/search_author', 'SiteController@searchBooksAuthor')->name('search.books.author');
+Route::get('/books/search_category', 'SiteController@searchBooksCategory')->name('search.books.category');
 Route::get('/authors', 'SiteController@authors')->name('authors');
 Route::get('/authors/{id}', 'SiteController@showAuthor')->name('show.author');
+Route::get('/categories/{category}', 'SiteController@filesByCategory')->name('filesByCategory');
 Route::get('/categories', 'SiteController@categories')->name('categories');
 
 Route::group(['middleware' => 'auth','namespace' => 'Admin','prefix'=>'admin'], function()

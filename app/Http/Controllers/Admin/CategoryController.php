@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Category;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 
@@ -44,12 +45,17 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param CategoryRequest $request
+     * @param Request $request
      * @param  \App\Category $category
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
-    public function update(CategoryRequest $request, Category $category)
+    public function update(Request $request, Category $category)
     {
+        $this->validate($request, [
+            'title' => 'required|max:20|unique:categories,title,' . $category->id,
+        ]);
+
         $category->update(['title' => $request->title]);
         return redirect()->route('categories');
     }

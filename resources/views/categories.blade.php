@@ -15,7 +15,7 @@
                     </div>
                     <ul class="list-group list-group-flush">
                         @foreach($categories as $category)
-                            <li class="list-group-item alert-link"><a href="">{{$category->title}}</a>
+                            <li class="list-group-item alert-link"><a href="{{route('filesByCategory', $category->title)}}">{{$category->title}}</a>
                                 @include('admin.function.category')
                             </li>
                         @endforeach

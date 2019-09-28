@@ -12,7 +12,9 @@ class SiteController extends Controller
     public function index()
     {
         $books = Book::with('author')->orderBy('created_at', 'desc')->paginate(12);
-        return view('index', compact('books'));
+        $categories = Category::all();
+        $authors = Author::all();
+        return view('index', compact('books','categories', 'authors'));
     }
 
     public function authors()
@@ -30,14 +32,36 @@ class SiteController extends Controller
 
     public function categories()
     {
-        $categories = Category::paginate(9);
+        $categories = Category::orderBy('created_at', 'desc')->paginate(9);
         return view('categories', compact('categories'));
     }
 
-    public function download()
+    public function download($id)
     {
 
+        $book = Book::find($id);
+        $pathToFile = storage_path('app/public/books/' . $book->link);
+        return response()->download($pathToFile);
     }
 
+    public function filesByCategory($category){
+        $books = Book::categoryForSelect($category)->paginate(12);
+        return view('index',compact('books'));
+    }
 
+    public function searchBooksAuthor(Request $request)
+    {
+        $books = Author::find($request->author_id)->books()->paginate(12);
+        $categories = Category::all();
+        $authors = Author::all();
+        return view('index', compact('books','categories', 'authors'));
+    }
+
+    public function searchBooksCategory(Request $request)
+    {
+        $books = Category::find($request->category_id)->books()->paginate(12);
+        $categories = Category::all();
+        $authors = Author::all();
+        return view('index', compact('books','categories', 'authors'));
+    }
 }

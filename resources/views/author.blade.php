@@ -19,7 +19,7 @@
                     <div class="col-md-4 my-2">
                         <h2>{{$book->title}}</h2>
                         <p>{{$book->description}}</p>
-                        <p><a href="{{Route('download',$book->link)}}">Download</a></p>
+                        <p><a href="{{Route('download',$book->id)}}">Download</a></p>
                         @include('admin.function.books')
                     </div>
                 @endforeach

@@ -27,7 +27,7 @@ class BookRequest extends FormRequest
         return [
             'title' => 'required|unique:books,title|max:60',
             'description' => 'max:255',
-            'link' => 'required|max:255',
+            'link' => 'required|mimes:txt,pdf,fb2',
             'author_id' => 'required',
         ];
     }
