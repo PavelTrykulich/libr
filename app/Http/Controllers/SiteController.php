@@ -69,4 +69,23 @@ class SiteController extends Controller
         $authors = Author::all();
         return view('index', compact('books','categories', 'authors'));
     }
+
+    /*public function search(Request $request)
+    {
+        if ($request->ajax()){
+                $query = $request->query;
+                if (!empty($query)){
+                    $data = $books = Book::join('authors', 'books.author_id', 'authors.id')
+                        ->where('authors.first_name', 'like', '%' . $query . '%')
+                        ->orWhere('authors.second_name', 'like', '%' . $query . '%')
+                        ->orWhere('books.title', 'like', '%' . $query . '%')
+                        ->orderBy('books.created_at', 'desc')
+                        ->paginate(12);
+                }
+                if ($data->count > 0){
+                    echo json_encode($data);
+                }
+
+        }
+    }*/
 }

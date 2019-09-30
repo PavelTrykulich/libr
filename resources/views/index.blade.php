@@ -1,11 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-
 <main role="main">
-
     <div class="jumbotron">
         <div class="container">
+            @if($authors->isNotEmpty())
             <form method="get" action="{{route('search.books.author')}}">
                 <p class="display-4 my-2">Search</p>
                 <p>By the author</p>
@@ -16,6 +15,8 @@
                 </select>
                 <button class="btn btn-secondary my-2 " role="button">Search</button>
             </form>
+            @endif
+            @if($categories->isNotEmpty())
             <form method="get" action="{{route('search.books.category')}}">
                 <p>By the category</p>
                 <select class="form-control form-control-sm my-2 w-75" name="category_id">
@@ -25,6 +26,7 @@
                 </select>
                 <button class="btn btn-secondary my-2" role="button">Search</button>
             </form>
+            @endif
         </div>
     </div>
 
@@ -33,7 +35,7 @@
             @if($books->isNotEmpty())
                 @foreach($books as $book)
                     <div class="col-md-4 my-4">
-                        <h2>{{$book->title}}</h2>
+                        <h2 class="book">{{$book->title}}</h2>
                         <p>{{$book->description}}</p>
                         <p>Author: <a href="{{Route('show.author',$book->author_id)}}">{{$book->author->getFullName()}}</a></p>
                         @include('layouts.showCategories')
@@ -55,5 +57,29 @@
 <div class="pagination row justify-content-center">
     {{$books->links()}}
 </div>
+{{--<script>
+    $(document).ready(function () {
+
+        fetch_customer_data();
+
+        function fetch_customer_data(query = '') {
+            $.ajax({
+                url: "{{ route('search') }}",
+                method: 'GET',
+                data: {query: query},
+                dataType: 'json',
+                success: function (data) {
+                    alert('ads');
+                }
+            });
+        }
+
+        $(document).on('keyup', '#search', function () {
+           var query = $(this).val();
+           fetch_customer_data(query);
+        });
+    });
+
+</script>--}}
 
 @endsection

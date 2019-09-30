@@ -15,13 +15,22 @@ Auth::routes();
 
 Route::get('/', 'SiteController@index')->name('index');
 
-Route::get('/books/download/{id}', 'SiteController@download')->name('download');
-Route::get('/books/search_author', 'SiteController@searchBooksAuthor')->name('search.books.author');
-Route::get('/books/search_category', 'SiteController@searchBooksCategory')->name('search.books.category');
-Route::get('/authors', 'SiteController@authors')->name('authors');
-Route::get('/authors/{id}', 'SiteController@showAuthor')->name('show.author');
-Route::get('/categories/{category}', 'SiteController@filesByCategory')->name('filesByCategory');
-Route::get('/categories', 'SiteController@categories')->name('categories');
+Route::prefix('books')->group(function () {
+    Route::get('download/{id}', 'SiteController@download')->name('download');
+    Route::get('search_author', 'SiteController@searchBooksAuthor')->name('search.books.author');
+    Route::get('search_category', 'SiteController@searchBooksCategory')->name('search.books.category');
+});
+
+Route::prefix('authors')->group(function () {
+    Route::get('/', 'SiteController@authors')->name('authors');
+    Route::get('{id}', 'SiteController@showAuthor')->name('show.author');
+});
+
+Route::prefix('categories')->group(function () {
+    Route::get('/', 'SiteController@categories')->name('categories');
+    Route::get('{category}', 'SiteController@filesByCategory')->name('filesByCategory');
+});
+
 
 Route::group(['middleware' => 'auth','namespace' => 'Admin','prefix'=>'admin'], function()
 {
